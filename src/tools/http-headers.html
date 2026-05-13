@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: system-ui, sans-serif;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			padding: 10px;
+			-webkit-app-region: drag;
+		}
+
+		input,
+		button,
+		#output {
+			-webkit-app-region: no-drag;
+		}
+
+		#titlebar {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		input {
+			width: 100%;
+			font-family: inherit;
+			padding: 4px;
+		}
+
+		#output {
+			flex: 1;
+			font-family: monospace;
+			font-size: 0.8rem;
+			white-space: pre-wrap;
+			word-break: break-all;
+			overflow-y: auto;
+			border: 1px solid #aaa;
+			padding: 6px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="titlebar"><strong>HTTP Header Analyzer</strong><button onclick="window.api.close()">✕</button></div>
+	<input id="input" type="text" placeholder="https://example.com" />
+	<div id="output">— output —</div>
+	<script>
+		async function run() {
+			const input = document.getElementById('input').value.trim();
+			if (!input) return;
+			document.getElementById('output').textContent = 'Fetching headers...';
+			try {
+				document.getElementById('output').textContent = await window.api.run('http-headers', null, input);
+			} catch (e) {
+				document.getElementById('output').textContent = 'Error: ' + e.message;
+			}
+		}
+		document.getElementById('input').addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
+		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });
+		document.getElementById('input').focus();
+	</script>
+</body>
+
+</html>

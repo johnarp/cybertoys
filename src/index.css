@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+	color-scheme: light dark;
+	--bg: light-dark(#d9d9d8, #1f1f1e);
+	--text: light-dark(#1f1f1e, #f8f8f6);
+    --border: light-dark(#cccccc, #444444);
+    --surface: light-dark(#f5f5f5, #111111);
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+	display: flex;
+	font-family: Urbanist, system-ui, sans-serif;
+	height: 100vh;
+	overflow: hidden;
+	margin: 0;
+}
+
+#sidebar {
+	width: 200px;
+	flex-shrink: 0;
+	border-right: 1px solid #aaa;
+	overflow-y: auto;
+}
+
+#content {
+	flex: 1;
+	padding: 32px;
+	overflow-y: auto;
+}
+
+.nav-heading {
+	padding: 10px 8px 2px;
+	font-size: 0.75rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.nav-item {
+	padding: 6px 8px 6px 20px;
+	cursor: pointer;
+}
+
+.nav-section.collapsed .nav-item {
+	display: none;
+}
+
+/* index.css unique */
+
+button {
+	background: var(--surface);
+	border: none;
+	color: var(--text);
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: bold;
+	padding: 1rem;
+}

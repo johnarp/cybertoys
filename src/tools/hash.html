@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="tool.css" />
+</head>
+
+<body>
+	<div id="titlebar"><strong>Hash Generator</strong><button onclick="window.api.close()">✕</button></div>
+	<select id="algorithm">
+		<option value="sha256">SHA256</option>
+		<option value="sha1">SHA1</option>
+		<option value="md5">MD5</option>
+	</select>
+	<textarea id="input" placeholder="Paste text to hash..."></textarea>
+	<div id="output">— output —</div>
+	<script>
+		document.getElementById('input').addEventListener('keydown', async (e) => {
+			if (e.key === 'Enter' && !e.shiftKey) {
+				e.preventDefault();
+				document.getElementById('output').textContent = await window.api.run('hash', document.getElementById('algorithm').value, document.getElementById('input').value);
+			}
+		});
+		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });
+		document.getElementById('input').focus();
+	</script>
+</body>
+
+</html>

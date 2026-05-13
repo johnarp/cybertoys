@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="tool.css" />
+</head>
+
+<body>
+	<div id="titlebar"><strong>URL Redirect Viewer</strong><button onclick="window.api.close()">✕</button></div>
+	<input id="input" type="text" placeholder="https://example.com" />
+	<div id="output">— output —</div>
+	<script>
+		async function run() {
+			const input = document.getElementById('input').value.trim();
+			if (!input) return;
+			document.getElementById('output').textContent = 'Following redirects...';
+			document.getElementById('output').textContent = await window.api.run('url-redirect', null, input);
+		}
+		document.getElementById('input').addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
+		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });
+		document.getElementById('input').focus();
+	</script>
+</body>
+
+</html>

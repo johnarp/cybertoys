@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="tool.css" />
+</head>
+
+<body>
+	<div id="titlebar"><strong>Base64</strong><button onclick="window.api.close()">✕</button></div>
+	<select id="mode">
+		<option value="encode">Encode</option>
+		<option value="decode">Decode</option>
+	</select>
+	<textarea id="input" placeholder="Paste text here..."></textarea>
+	<div id="output">— output —</div>
+	<script>
+		document.getElementById('input').addEventListener('keydown', async (e) => {
+			if (e.key === 'Enter' && !e.shiftKey) {
+				e.preventDefault();
+				document.getElementById('output').textContent = await window.api.run('base64', document.getElementById('mode').value, document.getElementById('input').value);
+			}
+		});
+		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });
+		document.getElementById('input').focus();
+	</script>
+</body>
+
+</html>

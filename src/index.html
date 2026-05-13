@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>CyberToys</title>
+	<link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+
+	<div id="sidebar">
+		<nav id="nav">
+			<div class="nav-item" id="home-item">Home</div>
+		</nav>
+	</div>
+
+	<div id="content"></div>
+
+	<script>
+		const tools = window.api.tools;
+
+		function showHome() {
+			document.getElementById('content').innerHTML = `
+				<h1>Home</h1>
+				<p>Select a tool from the sidebar, or press its hotkey anywhere to open it as a quick popup.</p>
+			`;
+		}
+
+		// Show home on load
+		showHome();
+		document.getElementById('home-item').addEventListener('click', showHome);
+
+		// Group tools by category
+		const categories = {};
+		for (const tool of tools) {
+			if (!categories[tool.category]) categories[tool.category] = [];
+			categories[tool.category].push(tool);
+		}
+
+		// Render sidebar nav
+		const nav = document.getElementById('nav');
+		for (const [category, categoryTools] of Object.entries(categories)) {
+			const section = document.createElement('div');
+			section.className = 'nav-section';
+
+			const heading = document.createElement('div');
+			heading.className = 'nav-heading';
+			heading.textContent = category;
+			heading.addEventListener('click', () => section.classList.toggle('collapsed'));
+			section.appendChild(heading);
+
+			for (const tool of categoryTools) {
+				const item = document.createElement('div');
+				item.className = 'nav-item';
+				item.textContent = tool.name;
+				item.addEventListener('click', () => showTool(tool));
+				section.appendChild(item);
+			}
+
+			nav.appendChild(section);
+		}
+
+		// Show tool detail on the right
+		function showTool(tool) {
+			const hotkey = tool.hotkey.replace('CommandOrControl', 'Ctrl/⌘');
+			document.getElementById('content').innerHTML = `
+				<h1>${tool.name}</h1>
+				<p>${tool.description}</p>
+				<p><strong>Hotkey:</strong> <code>${hotkey}</code></p>
+				<button onclick="window.api.openTool('${tool.id}')">Open popup</button>
+			`;
+		}
+	</script>
+
+</body>
+
+</html>
