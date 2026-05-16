@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<link rel="stylesheet" href="tool.css" />
+	<link rel="stylesheet" href="../tool.css" />
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 			const input = document.getElementById('input').value.trim();
 			if (!input) return;
 			document.getElementById('output').textContent = 'Looking up...';
-			document.getElementById('output').textContent = await window.api.run('dns', document.getElementById('type').value, input);
+			document.getElementById('output').textContent = await window.api.run('dns-lookup', document.getElementById('type').value, input);
 		}
 		document.getElementById('input').addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
 		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });

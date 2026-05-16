@@ -3,14 +3,14 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<link rel="stylesheet" href="tool.css" />
+	<link rel="stylesheet" href="../tool.css" />
 </head>
 
 <body>
 	<div id="titlebar"><strong>Network Info</strong><button onclick="window.api.close()">✕</button></div>
 	<div id="output">Loading...</div>
 	<script>
-		window.api.run('netinfo', null, null).then(r => document.getElementById('output').textContent = r);
+		window.api.run('network-info', null, null).then(r => document.getElementById('output').textContent = r);
 		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });
 	</script>
 </body>

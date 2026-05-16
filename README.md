@@ -21,7 +21,7 @@ A collection of cybersecurity tools.
 | Tool | Description |
 | - | - |
 | Base64 | Encode or decode Base64 strings. |
-| URL | URL-encode or decode strings. |
+| URL Encode | URL-encode or decode strings. |
 
 ### Hashing
 
@@ -47,7 +47,8 @@ A collection of cybersecurity tools.
 
 | Tool | Description |
 | - | - |
-| Password Analyzer | Analyze password strength and generate strong passwords. |
+| Password Analyzer | Analyze password strength. |
+| Password Generator | Generate strong random passwords. |
 
 ## 📦 Built With
 
@@ -84,11 +85,11 @@ npm start
 ### General
 
 - Installation
-- Running in the background
 - Better tool organization in README
-- Better tool management in the tools folder
 - Allow resizing of pop up windows
 - Allow zoom in/out
+- Run on startup
+- Allow changing hotkeys
 
 ### New Tools
 

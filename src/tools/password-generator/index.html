@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /><link rel="stylesheet" href="../tool.css" /></head>
+<body>
+	<div id="titlebar"><strong>Password Generator</strong><button onclick="window.api.close()">✕</button></div>
+	<div id="output">Press Enter to generate</div>
+	<script>
+		async function run() {
+			document.getElementById('output').textContent = await window.api.run('password-generator', null, null);
+		}
+		document.addEventListener('keydown', e => {
+			if (e.key === 'Enter') run();
+			if (e.key === 'Escape') window.api.close();
+		});
+		// Generate one immediately on open
+		run();
+	</script>
+</body>
+</html>

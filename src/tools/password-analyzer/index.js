@@ -4,7 +4,7 @@ const https = require('https');
 function analyze(password) {
 	const checks = [];
 
-	if (password.length >= 16)     checks.push('✓ Length ≥ 16');
+	if (password.length >= 16)      checks.push('✓ Length ≥ 16');
 	else if (password.length >= 12) checks.push('~ Length ≥ 12 (16+ recommended)');
 	else                            checks.push(`✗ Length: ${password.length} (too short)`);
 
@@ -22,7 +22,6 @@ function analyze(password) {
 
 	const score = checks.filter(c => c.startsWith('✓')).length;
 	const rating = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'][Math.min(score, 4)];
-
 	return { rating, checks };
 }
 
@@ -48,18 +47,7 @@ function hibp(password) {
 	});
 }
 
-function generate() {
-	const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*-_=+';
-	const bytes = crypto.randomBytes(20);
-	return Array.from(bytes).map(b => chars[b % chars.length]).join('');
-}
-
-exports.run = async function (mode, input) {
-	if (mode === 'generate') {
-		return generate();
-	}
-
-	// analyze
+exports.run = async function (_, input) {
 	const { rating, checks } = analyze(input);
 	let out = `Strength: ${rating}\n\n${checks.join('\n')}\n\n`;
 	out += await hibp(input);

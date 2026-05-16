@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-<head><meta charset="UTF-8" /><link rel="stylesheet" href="tool.css" /></head>
+<head><meta charset="UTF-8" /><link rel="stylesheet" href="../tool.css" /></head>
 <body>
 	<div id="titlebar"><strong>HTTP Header Analyzer</strong><button onclick="window.api.close()">✕</button></div>
 	<input id="input" type="text" placeholder="https://example.com" />
@@ -10,7 +10,7 @@
 			const input = document.getElementById('input').value.trim();
 			if (!input) return;
 			document.getElementById('output').textContent = 'Fetching headers...';
-			document.getElementById('output').textContent = await window.api.run('http-headers', null, input);
+			document.getElementById('output').textContent = await window.api.run('http-header-analyzer', null, input);
 		}
 		document.getElementById('input').addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
 		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });

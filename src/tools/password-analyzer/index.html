@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /><link rel="stylesheet" href="../tool.css" /></head>
+<body>
+	<div id="titlebar"><strong>Password Analyzer</strong><button onclick="window.api.close()">✕</button></div>
+	<input id="input" type="password" placeholder="Enter password to analyze..." />
+	<div id="output">— output —</div>
+	<script>
+		async function run() {
+			const input = document.getElementById('input').value;
+			if (!input) return;
+			document.getElementById('output').textContent = 'Checking...';
+			document.getElementById('output').textContent = await window.api.run('password-analyzer', null, input);
+		}
+		document.getElementById('input').addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
+		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });
+		document.getElementById('input').focus();
+	</script>
+</body>
+</html>

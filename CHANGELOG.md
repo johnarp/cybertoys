@@ -1,7 +1,25 @@
 # Changelog
 
+[0.2.0]: https://github.com/johnarp/cybertoys/releases/tag/v0.2.0
 [0.1.1]: https://github.com/johnarp/cybertoys/releases/tag/v0.1.1
 [0.1.0]: https://github.com/johnarp/cybertoys/releases/tag/v0.1.0
+
+## [0.2.0] - 2026-05-16
+
+### Added
+
+- App and tray icon
+
+### Changed
+
+- App starts in the tray
+- App stays running when closed, need to close from the tray.
+- Separated tools into their own folders
+- **Password Analyzer:** Separated into **Password Analyzer** and **✨ Password Generator**.
+
+### Fixed
+
+- Correctly strips `https://` if its entered
 
 ## [0.1.1] - 2026-05-16
 

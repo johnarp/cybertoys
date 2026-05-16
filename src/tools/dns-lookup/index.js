@@ -1,7 +1,7 @@
 const dns = require('dns').promises;
 
 exports.run = async function (type, domain) {
-	domain = domain.trim();
+	domain = domain.trim().replace(/^https?:\/\//, '').split('/')[0];
 
 	if (type === 'A')     return (await dns.resolve4(domain)).join('\n');
 	if (type === 'AAAA')  return (await dns.resolve6(domain)).join('\n');
