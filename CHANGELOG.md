@@ -1,6 +1,22 @@
 # Changelog
 
+[0.1.1]: https://github.com/johnarp/cybertoys/releases/tag/v0.1.1
 [0.1.0]: https://github.com/johnarp/cybertoys/releases/tag/v0.1.0
+
+## [0.1.1] - 2026-05-16
+
+### Added
+
+- README preview images
+
+### Changed
+
+- Styling
+- Branding images
+
+### Fixed
+
+- HTTP Header Analyzer now uses tool.css
 
 ## [0.1.0] - 2026-05-13
 

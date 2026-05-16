@@ -55,12 +55,12 @@ A collection of cybersecurity tools.
 | - | - |
 | Electron Forge | Handles packaging and creating installers |
 
-<!-- ## 📸 Preview
+## 📸 Preview
 
 <div style="display: flex; gap: 10px; justify-content: center">
-    <img src="source" width="45%">
-    <img src="source" width="45%">
-</div> -->
+    <img src="./public/preview-1.png" width="45%">
+    <img src="./public/preview-2.png" width="45%">
+</div>
 
 ## 🚀 Installation
 
@@ -84,13 +84,11 @@ npm start
 ### General
 
 - Installation
-- Styling
 - Running in the background
-- Clearer folders
-- Change branding to reflect new colors
-- README previews
-- Better README
+- Better tool organization in README
 - Better tool management in the tools folder
+- Allow resizing of pop up windows
+- Allow zoom in/out
 
 ### New Tools
 

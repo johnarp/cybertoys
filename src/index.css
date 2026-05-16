@@ -2,11 +2,15 @@
 
 :root {
 	color-scheme: light dark;
-	--bg: light-dark(#d9d9d8, #1f1f1e);
-	--text: light-dark(#1f1f1e, #f8f8f6);
-    --border: light-dark(#cccccc, #444444);
-    --surface: light-dark(#f5f5f5, #111111);
+	--bg:          light-dark(#f9f9f9, #0f0f0f);
+	--sidebar-bg:  light-dark(#f0f0f0, #171717);
+	--text:        light-dark(#0f0f0f, #f0f0f0);
+	--muted:       light-dark(#888888, #666666);
+	--border:      light-dark(#dedede, #2a2a2a);
+	--hover:       light-dark(#00000010, #ffffff10);
 }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
 	background: var(--bg);
@@ -15,48 +19,134 @@ body {
 	font-family: Urbanist, system-ui, sans-serif;
 	height: 100vh;
 	overflow: hidden;
-	margin: 0;
 }
+
+/* --------------------
+	SIDEBAR
+-------------------- */
 
 #sidebar {
-	width: 200px;
+	width: 210px;
 	flex-shrink: 0;
-	border-right: 1px solid #aaa;
-	overflow-y: auto;
+	background: var(--sidebar-bg);
+	border-right: 1px solid var(--border);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
-#content {
+/* App name — also acts as the drag region on the left side of the top bar */
+#app-name {
+	height: 36px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	padding: 0 14px;
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: var(--muted);
+	-webkit-app-region: drag;
+	user-select: none;
+}
+
+#nav {
 	flex: 1;
-	padding: 32px;
 	overflow-y: auto;
+	padding: 8px 0;
 }
 
 .nav-heading {
-	padding: 10px 8px 2px;
-	font-size: 0.75rem;
-	font-weight: bold;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 10px 12px 4px;
+	font-size: 0.7rem;
+	font-weight: 700;
 	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--muted);
 	cursor: pointer;
+	user-select: none;
 }
 
-.nav-item {
-	padding: 6px 8px 6px 20px;
-	cursor: pointer;
+.nav-heading::before {
+	content: '▾';
+	font-size: 0.75rem;
+	display: inline-block;
+	transition: transform 0.15s;
+	width: 10px;
+	text-align: center;
+}
+
+.nav-section.collapsed .nav-heading::before {
+	transform: rotate(-90deg);
 }
 
 .nav-section.collapsed .nav-item {
 	display: none;
 }
 
-/* index.css unique */
+.nav-item {
+	padding: 7px 12px 7px 28px;
+	font-size: 0.9rem;
+	cursor: pointer;
+	border-radius: 4px;
+	margin: 0 6px;
+}
+
+.nav-item:hover {
+	background: var(--hover);
+}
+
+.nav-item.active { 
+	background: light-dark(#00000018, #ffffff18); 
+}
+
+/* --------------------
+	RIGHT PANEL
+-------------------- */
+
+#right-panel {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+/* Invisible drag strip — same height as #app-name, makes the full top row draggable */
+#drag-strip {
+	height: 36px;
+	flex-shrink: 0;
+	-webkit-app-region: drag;
+}
+
+#content {
+	flex: 1;
+	padding: 40px;
+	overflow-y: auto;
+}
+
+h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 10px; }
+p  { color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+
+code {
+	background: var(--hover);
+	border: 1px solid var(--border);
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 0.88em;
+}
 
 button {
-	background: var(--surface);
-	border: none;
+	margin-top: 4px;
+	padding: 8px 16px;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background: var(--hover);
 	color: var(--text);
-	cursor: pointer;
 	font-family: inherit;
-	font-size: 1rem;
-	font-weight: bold;
-	padding: 1rem;
+	font-size: 0.9rem;
+	cursor: pointer;
 }
+
+button:hover { filter: brightness(0.9); }

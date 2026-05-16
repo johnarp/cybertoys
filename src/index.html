@@ -10,15 +10,24 @@
 <body>
 
 	<div id="sidebar">
+		<div id="app-name">CyberToys</div>
 		<nav id="nav">
 			<div class="nav-item" id="home-item">Home</div>
 		</nav>
 	</div>
 
-	<div id="content"></div>
+	<div id="right-panel">
+		<div id="drag-strip"></div>
+		<div id="content"></div>
+	</div>
 
 	<script>
 		const tools = window.api.tools;
+
+		function setActive(el) {
+			document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+			el.classList.add('active');
+		}
 
 		function showHome() {
 			document.getElementById('content').innerHTML = `
@@ -27,18 +36,17 @@
 			`;
 		}
 
-		// Show home on load
+		const homeItem = document.getElementById('home-item');
 		showHome();
-		document.getElementById('home-item').addEventListener('click', showHome);
+		setActive(homeItem);
+		homeItem.addEventListener('click', () => { showHome(); setActive(homeItem); });
 
-		// Group tools by category
 		const categories = {};
 		for (const tool of tools) {
 			if (!categories[tool.category]) categories[tool.category] = [];
 			categories[tool.category].push(tool);
 		}
 
-		// Render sidebar nav
 		const nav = document.getElementById('nav');
 		for (const [category, categoryTools] of Object.entries(categories)) {
 			const section = document.createElement('div');
@@ -54,14 +62,13 @@
 				const item = document.createElement('div');
 				item.className = 'nav-item';
 				item.textContent = tool.name;
-				item.addEventListener('click', () => showTool(tool));
+				item.addEventListener('click', () => { showTool(tool); setActive(item); });
 				section.appendChild(item);
 			}
 
 			nav.appendChild(section);
 		}
 
-		// Show tool detail on the right
 		function showTool(tool) {
 			const hotkey = tool.hotkey.replace('CommandOrControl', 'Ctrl/⌘');
 			document.getElementById('content').innerHTML = `

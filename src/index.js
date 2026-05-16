@@ -1,18 +1,30 @@
-const { app, BrowserWindow, globalShortcut, ipcMain, screen } = require('electron');
+const { app, BrowserWindow, globalShortcut, ipcMain, screen, Menu, nativeTheme } = require('electron');
 const path = require('node:path');
 
 if (require('electron-squirrel-startup')) app.quit();
 
+Menu.setApplicationMenu(null);
+
 const tools = require('./tools');
 let mainWindow;
-const toolWindows = {}; // track open tool windows by tool id
+const toolWindows = {};
 
-// --- Main window ---
+// Matches --sidebar-bg in index.css for both modes
+function getOverlay() {
+	const dark = nativeTheme.shouldUseDarkColors;
+	return {
+		color:       dark ? '#0f0f0f' : '#f9f9f9',
+		symbolColor: dark ? '#888888' : '#666666',
+		height: 36,
+	};
+}
 
 function createMainWindow() {
 	mainWindow = new BrowserWindow({
 		width: 900,
 		height: 600,
+		titleBarStyle: 'hidden',
+		titleBarOverlay: getOverlay(),
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
 			sandbox: false,
@@ -21,16 +33,17 @@ function createMainWindow() {
 	mainWindow.loadFile(path.join(__dirname, 'index.html'));
 }
 
-// --- Tool popup window ---
+// Update the overlay colors when the OS switches light/dark mode
+nativeTheme.on('updated', () => {
+	mainWindow?.setTitleBarOverlay(getOverlay());
+});
 
 function openToolWindow(toolId) {
-	// If already open, just bring it to focus
 	if (toolWindows[toolId]) {
 		toolWindows[toolId].focus();
 		return;
 	}
 
-	// Position in bottom-right corner of the screen
 	const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
 	const win = new BrowserWindow({
@@ -38,10 +51,10 @@ function openToolWindow(toolId) {
 		height: 270,
 		x: width - 440,
 		y: height - 290,
-		frame: false,        // no title bar
-		alwaysOnTop: true,   // stays above other windows
+		frame: false,
+		alwaysOnTop: true,
 		resizable: false,
-		skipTaskbar: true,   // doesn't show in taskbar
+		skipTaskbar: true,
 		webPreferences: {
 			preload: path.join(__dirname, 'tool-preload.js'),
 			sandbox: false,
@@ -49,17 +62,13 @@ function openToolWindow(toolId) {
 	});
 
 	win.loadFile(path.join(__dirname, 'tools', toolId + '.html'));
-
 	win.on('closed', () => delete toolWindows[toolId]);
 	toolWindows[toolId] = win;
 }
 
-// --- App lifecycle ---
-
 app.whenReady().then(() => {
 	createMainWindow();
 
-	// Register a global hotkey for every tool
 	for (const tool of tools) {
 		if (tool.hotkey) {
 			globalShortcut.register(tool.hotkey, () => openToolWindow(tool.id));
@@ -79,17 +88,12 @@ app.on('will-quit', () => {
 	globalShortcut.unregisterAll();
 });
 
-// --- IPC handlers ---
-
-// Called from main window when user clicks "Open Tool" button
 ipcMain.on('open-tool', (_, toolId) => openToolWindow(toolId));
 
-// Called from tool window to close itself
 ipcMain.on('close-tool-window', (event) => {
 	BrowserWindow.fromWebContents(event.sender)?.close();
 });
 
-// Run a tool — called via ipcRenderer.invoke from tool windows
 ipcMain.handle('run-tool', async (_, toolId, option, input) => {
 	const mod = require(path.join(__dirname, 'tools', toolId));
 	return await mod.run(option, input);
