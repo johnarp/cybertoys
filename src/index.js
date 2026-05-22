@@ -1,6 +1,10 @@
 const { app, BrowserWindow, globalShortcut, ipcMain, screen, Menu, Tray, nativeTheme } = require('electron');
 const path = require('node:path');
 
+if (process.platform === 'win32') {
+    app.setAppUserModelId('com.johnarp.cybertoys'); 
+}
+
 if (require('electron-squirrel-startup')) app.quit();
 
 Menu.setApplicationMenu(null);
@@ -31,7 +35,7 @@ function createMainWindow() {
 		height: 600,
 		titleBarStyle: 'hidden',
 		titleBarOverlay: getOverlay(),
-		icon: path.join(__dirname, 'assets', 'icon.png'),
+		icon: path.join(__dirname, 'assets', 'icon.ico'),
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
 			sandbox: false,
