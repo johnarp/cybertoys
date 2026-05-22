@@ -4,12 +4,17 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
 	packagerConfig: {
 		asar: true,
+		icon: './src/assets/icon',
 	},
 	rebuildConfig: {},
 	makers: [
 		{
 			name: '@electron-forge/maker-squirrel',
-			config: {},
+			config: {
+				setupExe: `CyberToys-${require('./package.json').version}-Setup.exe`,
+				setupIcon: './src/assets/icon.ico',
+				iconUrl: 'https://raw.githubusercontent.com/johnarp/cybertoys/main/src/assets/icon.ico',
+			},
 		},
 		{
 			name: '@electron-forge/maker-zip',

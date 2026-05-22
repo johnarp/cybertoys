@@ -47,7 +47,7 @@ A collection of cybersecurity tools.
 
 | Tool | Description |
 | - | - |
-| Password Analyzer | Analyze password strength. |
+| Password Analyzer | Analyze password strength and check via HIBP. Uses k-anonymity. |
 | Password Generator | Generate strong random passwords. |
 
 ## 📦 Built With
@@ -65,26 +65,51 @@ A collection of cybersecurity tools.
 
 ## 🚀 Installation
 
-> Packaged installers are coming.
+### Option A: Premade Installer
 
-### Requirements
+> **Requirements:** Windows 10/11/Server 2016+ (64-bit)
 
-- [Node.js](https://nodejs.org) (v18+)
+The simplest way is to use the premade [installer](https://github.com/johnarp/cybertoys/releases).
 
-### Clone the Repository and Run
+1. Find the latest release
+2. Find the .exe (eg. CyberToys-#.#.#-Setup.exe)
+3. Download and install
 
-```
-git clone https://github.com/johnarp/cybertoys.git
-cd cybertoys
-npm install
-npm start
-```
+### Option B: Make Your Own Installer
+
+> **Requirements:** [Node.js](https://nodejs.org) (v18+)
+
+1. Clone the repository and run:
+    ```
+    git clone https://github.com/johnarp/cybertoys.git
+    ```
+2. Navigate to the repository and install required dependencies
+    ```
+    cd cybertoys
+    npm install
+    ```
+3. Use Electron Forge to create an installer
+    ```
+    npm run make
+    ```
+
+> Note: This creates an installer for your current operating system. Building for other platforms requires running the command on that platform.
+
+### Option C: Run Without Installing
+
+You can run the app without installing by opening it directly from the source code.
+
+1. Follow **Option B** until and including Step 2.
+2. Run the application using:
+    ```
+    npm start
+    ```
 
 ## 🗺️ Roadmap
 
 ### General
 
-- Installation
+- Installers for different operating systems (eg. MacOS, Linux, etc.)
 - Better tool organization in README
 - Allow resizing of pop up windows
 - Allow zoom in/out
@@ -109,7 +134,7 @@ npm start
 - Packet sniffer
 - Hash Cracker
 - Port Scanner
-- SSL Certifiate Checker
+- SSL Certificate Checker
 
 ## 📜 Disclaimer
 
