@@ -1,9 +1,23 @@
 # Changelog
 
+[0.3.0]: https://github.com/johnarp/cybertoys/releases/tag/v0.3.0
 [0.2.1]: https://github.com/johnarp/cybertoys/releases/tag/v0.2.1
 [0.2.0]: https://github.com/johnarp/cybertoys/releases/tag/v0.2.0
 [0.1.1]: https://github.com/johnarp/cybertoys/releases/tag/v0.1.1
 [0.1.0]: https://github.com/johnarp/cybertoys/releases/tag/v0.1.0
+
+## [0.3.0] - 2026-05-26
+
+### Added
+
+- **✨ Port Scanner**
+- **✨ SSL Certificate Checker**
+
+### Changed
+
+- Pop-up windows can now be resized
+- Scrollbar space is reserved and styling matches
+- `icon.ico` is now higher quality
 
 ## [0.2.1] - 2026-05-21
 

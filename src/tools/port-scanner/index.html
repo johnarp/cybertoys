@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8" /><link rel="stylesheet" href="../tool.css" /></head>
+<body>
+	<div id="titlebar"><strong>Port Scanner</strong><button onclick="window.api.close()">✕</button></div>
+	<input id="host" type="text" placeholder="Host (e.g. 192.168.1.1 or google.com)" />
+	<input id="ports" type="text" placeholder="Ports (e.g. 80,443 or 1-1024 or 22,80,1000-2000)" />
+	<div id="output">— output —</div>
+	<script>
+		async function run() {
+			const host = document.getElementById('host').value.trim();
+			const ports = document.getElementById('ports').value.trim();
+			if (!host || !ports) return;
+			document.getElementById('output').textContent = 'Scanning...';
+			document.getElementById('output').textContent = await window.api.run('port-scanner', null, `${host}|${ports}`);
+		}
+		document.getElementById('ports').addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
+		document.addEventListener('keydown', e => { if (e.key === 'Escape') window.api.close(); });
+		document.getElementById('host').focus();
+	</script>
+</body>
+</html>

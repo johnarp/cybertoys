@@ -86,7 +86,7 @@ function openToolWindow(toolId) {
 		y: height - 290,
 		frame: false,
 		alwaysOnTop: true,
-		resizable: false,
+		// resizable: false,
 		skipTaskbar: true,
 		webPreferences: {
 			preload: path.join(__dirname, 'tool-preload.js'),

@@ -35,12 +35,14 @@ A collection of cybersecurity tools.
 | - | - |
 | DNS Lookup | Resolve A, AAAA, MX, NS, TXT, and CNAME records for any domain. |
 | Network Info | Display local network interfaces, IPs, and MACs. |
+| Port Scanner | Scan a host for open TCP ports. |
 
 ### Web
 
 | Tool | Description |
 | - | - |
 | HTTP Header Analyzer | Fetch HTTP headers and audit them for common security issues. |
+| SSL Certificate Checker | Check the SSL certificate of any host. |
 | URL Redirect Viewer | Follow a URL through its full redirect chain. |
 
 ### Passwords
@@ -111,7 +113,6 @@ You can run the app without installing by opening it directly from the source co
 
 - Installers for different operating systems (eg. MacOS, Linux, etc.)
 - Better tool organization in README
-- Allow resizing of pop up windows
 - Allow zoom in/out
 - Run on startup
 - Allow changing hotkeys
@@ -133,8 +134,6 @@ You can run the app without installing by opening it directly from the source co
 - Traceroute visualizer
 - Packet sniffer
 - Hash Cracker
-- Port Scanner
-- SSL Certificate Checker
 
 ## 📜 Disclaimer
 

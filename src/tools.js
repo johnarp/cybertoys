@@ -63,4 +63,18 @@ module.exports = [
 		hotkey: 'CommandOrControl+Shift+R',
 		description: 'Follow a URL through its full redirect chain.',
 	},
+	{
+		id: 'port-scanner',
+		name: 'Port Scanner',
+		category: 'Network',
+		hotkey: 'CommandOrControl+Shift+O',
+		description: 'Scan a host for open TCP ports.',
+	},
+	{
+		id: 'ssl-certificate-checker',
+		name: 'SSL Certificate Checker',
+		category: 'Web',
+		hotkey: 'CommandOrControl+Shift+S',
+		description: 'Check the SSL certificate of any host.'
+	}
 ];
